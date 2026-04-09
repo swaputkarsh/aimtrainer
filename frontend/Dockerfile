@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm i
 
 # Copy source code
 COPY . .
@@ -25,8 +25,8 @@ WORKDIR /app
 RUN npm install -g serve
 
 # Copy built app from builder
-COPY --from=builder /app/dist ./dist
-
+#COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/build ./build
 # Expose port
 EXPOSE 3000
 
@@ -35,4 +35,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Start server
-CMD ["serve", "-s", "dist", "-l", "3000"]
+#CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "build", "-l", "3000"]
