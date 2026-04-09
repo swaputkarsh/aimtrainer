@@ -1,0 +1,260 @@
+/* Game Container - full screen */
+.game-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Canvas - covers entire screen */
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #0f0f0f;
+  cursor: crosshair;
+}
+
+/* HUD - Heads Up Display during gameplay */
+.hud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 30px;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px 25px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.hud-label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.hud-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00ff96;
+  text-shadow: 0 0 10px rgba(0, 255, 150, 0.5);
+}
+
+.hud-value.status-online {
+  font-size: 20px;
+  color: #00ff96;
+}
+
+.hud-value.status-offline {
+  font-size: 20px;
+  color: #ff6b6b;
+}
+
+/* Screens - Start and End overlays */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.screen-content {
+  text-align: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.screen h1 {
+  font-size: 64px;
+  margin: 0 0 30px 0;
+  color: #00ff96;
+  text-shadow: 0 0 20px rgba(0, 255, 150, 0.8);
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px rgba(0, 255, 150, 0.5);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(0, 255, 150, 1);
+  }
+}
+
+.screen p {
+  font-size: 18px;
+  margin: 15px 0;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Stats display on end screen */
+.stats {
+  margin: 40px 0;
+  display: inline-block;
+  background: rgba(0, 255, 150, 0.1);
+  padding: 30px 50px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 150, 0.3);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 15px 0;
+  font-size: 20px;
+}
+
+.stat-label {
+  color: #999;
+  font-weight: 500;
+}
+
+.stat-value {
+  color: #00ff96;
+  font-weight: bold;
+  font-family: 'Monaco', 'Courier New', monospace;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Buttons */
+.btn {
+  padding: 15px 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 30px;
+}
+
+.btn-primary {
+  background: #00ff96;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 150, 0.4);
+}
+
+.btn-primary:hover {
+  background: #00ffaa;
+  box-shadow: 0 0 30px rgba(0, 255, 150, 0.8);
+  transform: scale(1.05);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .screen h1 {
+    font-size: 48px;
+  }
+
+  .screen p {
+    font-size: 16px;
+  }
+
+  .hud {
+    top: 10px;
+    left: 10px;
+    gap: 15px;
+    padding: 10px 15px;
+  }
+
+  .hud-value {
+    font-size: 20px;
+  }
+
+  .hud-label {
+    font-size: 10px;
+  }
+
+  .stats {
+    padding: 20px 30px;
+  }
+
+  .stat-row {
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .screen h1 {
+    font-size: 36px;
+  }
+
+  .screen p {
+    font-size: 14px;
+  }
+
+  .hud {
+    flex-wrap: wrap;
+    top: 5px;
+    left: 5px;
+    gap: 10px;
+  }
+
+  .hud-value {
+    font-size: 18px;
+  }
+
+  .stats {
+    padding: 15px 20px;
+  }
+
+  .stat-row {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  .stat-label {
+    text-align: left;
+  }
+
+  .stat-value {
+    text-align: left;
+  }
+}
